@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Envs
+.venv/
+venv/
+.env
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data — tracked by DVC, never git
+/data/raw/*
+/data/interim/*
+/data/processed/*
+!/data/**/.gitkeep
+
+# MLflow / models
+mlruns/
+*.pkl
+*.joblib
+
+# OS
+.DS_Store

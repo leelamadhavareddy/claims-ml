@@ -1,0 +1,23 @@
+# Single source of truth for paths + params. No hardcoding in code.
+project:
+  name: claims-ml
+  random_seed: 42
+
+paths:
+  raw: data/raw/claims.csv
+  interim: data/interim
+  processed: data/processed
+
+split:
+  test_size: 0.2
+  stratify: true          # classes are imbalanced
+
+target:
+  column: claim_outcome   # rename to your label column
+
+mlflow:
+  tracking_uri: http://localhost:5000
+  experiment_name: claims-prediction
+
+model:
+  registered_name: claims-model

@@ -1,0 +1,3 @@
+# Patterns DVC should ignore (mirrors .gitignore basics)
+__pycache__/
+.ipynb_checkpoints/
