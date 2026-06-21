@@ -6,6 +6,8 @@ Run:  python scripts/register_model.py
 from __future__ import annotations
 
 from claims_ml.models.register import promote_to_production, register_best
+import mlflow
+mlflow.set_tracking_uri("http://localhost:5000")
 
 
 def main() -> None:

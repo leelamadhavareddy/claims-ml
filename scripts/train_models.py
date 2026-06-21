@@ -5,6 +5,8 @@ Then: mlflow ui     (open http://localhost:5000 to see the runs)
 """
 
 from __future__ import annotations
+import mlflow
+mlflow.set_tracking_uri("http://localhost:5000")  # for local MLflow server
 
 from claims_ml.config import load_config
 from claims_ml.data.ingest import load_and_validate
