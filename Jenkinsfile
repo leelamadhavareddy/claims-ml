@@ -18,14 +18,13 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    docker run --rm -v "$PWD":/app -w /app python:3.11-slim sh -c "
+                    docker run --rm -v "$WORKSPACE":/app -w /app python:3.11-slim sh -c "
                         pip install --quiet -e '.[dev]' &&
                         python -m pytest -q
                     "
                 '''
             }
         }
-
         stage('Build image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
