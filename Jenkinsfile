@@ -17,12 +17,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh '''
-                    docker run --rm -v "$WORKSPACE":/app -w /app python:3.11-slim sh -c "
-                        pip install --quiet -e '.[dev]' &&
-                        python -m pytest -q
-                    "
-                '''
+                sh 'docker build -f Dockerfile.test -t $IMAGE_NAME:test .'
+                sh 'docker run --rm $IMAGE_NAME:test'
             }
         }
         stage('Build image') {
