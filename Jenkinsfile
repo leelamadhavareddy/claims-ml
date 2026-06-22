@@ -28,7 +28,11 @@ pipeline {
             }
         }
 
-       
+        stage('Build image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
+            }
+        }
 
         stage('Push to ECR') {
             steps {
