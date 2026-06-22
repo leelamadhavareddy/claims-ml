@@ -1,5 +1,7 @@
 FROM python:3.11-slim
 WORKDIR /app
 COPY . .
-RUN pip install --retries 10 --timeout 120 -e ".[dev]"
+RUN pip install --retries 10 --timeout 120 \
+    pandas scikit-learn xgboost pyyaml pytest fastapi joblib
+RUN pip install --no-deps -e .
 CMD ["python", "-m", "pytest", "-q"]
