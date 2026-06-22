@@ -17,8 +17,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'pip install -e ".[dev]"'
-                sh 'pytest -q'
+                sh 'pip3 install --break-system-packages -e ".[dev]"'
+                sh 'python3 -m pytest -q'
             }
         }
 
