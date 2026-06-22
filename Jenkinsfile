@@ -15,16 +15,14 @@ pipeline {
             steps { checkout scm }
         }
 
-        stage('Build image') {
-            steps {
-                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
-            }
-        }
-
         stage('Test') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:test --target test . || docker build -t $IMAGE_NAME:test .'
-                sh 'docker run --rm $IMAGE_NAME:$BUILD_NUMBER python -m pytest -q || echo "no tests in image, skipping"'
+                sh '''
+                    docker run --rm -v "$PWD":/app -w /app python:3.11-slim sh -c "
+                        pip install --quiet -e '.[dev]' &&
+                        python -m pytest -q
+                    "
+                '''
             }
         }
 
