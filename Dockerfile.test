@@ -1,7 +1,10 @@
 FROM python:3.11-slim
 WORKDIR /app
 COPY . .
+
+# xgboost-cpu has NO nvidia GPU dependency (skips the 303MB download)
 RUN pip install --retries 10 --timeout 120 \
-    pandas scikit-learn xgboost pyyaml pytest fastapi joblib
+    pandas scikit-learn xgboost-cpu pyyaml pytest fastapi joblib
 RUN pip install --no-deps -e .
+
 CMD ["python", "-m", "pytest", "-q"]
